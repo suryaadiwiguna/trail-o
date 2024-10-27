@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import Sidebar from "./sidebar"
 
 export default function MobileSidebar() {
-    const pathname = usePathname
+    const pathname = usePathname()
     const [isMounted, setIsMounted] = useState(false)
 
     const onOpen = useMobileSidebar((state) => state.onOpen)
