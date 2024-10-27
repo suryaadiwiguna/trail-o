@@ -1,18 +1,10 @@
-import { db } from "@/lib/db"
+import { createBoard } from "@/actions/create-board";
+import { Button } from "@/components/ui/button";
+import { db } from "@/lib/db";
+import { Board } from "./board";
 
-export default function OrganizationIdPage() {
-    async function createBoard(formData: FormData) {
-        "use server"
-
-        const title = formData.get("title") as string
-
-        await db.board.create({
-            data: {
-                title
-            }
-        })
-
-    }
+export default async function OrganizationIdPage() {
+    const boards = await db.board.findMany()
 
     return (
         <div>
@@ -24,7 +16,19 @@ export default function OrganizationIdPage() {
                     placeholder="Enter a board title"
                     className="border-gray-400 border rounded-sm p-1 px-2"
                 />
+                <Button type="submit">
+                    Submit
+                </Button>
             </form>
+            <div className="space-y-2">
+                {boards.map((board) => (
+                    <Board
+                        key={board.id}
+                        title={board.title}
+                        id={board.id}
+                    />
+                ))}
+            </div>
         </div>
     )
 }

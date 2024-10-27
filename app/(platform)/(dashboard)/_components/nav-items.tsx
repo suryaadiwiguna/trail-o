@@ -79,6 +79,7 @@ export default function NavItem({
                             src={organization.imageUrl}
                             alt="Organization"
                             className="rounded-sm object-cover"
+                            sizes="max-width:650px"
                         />
                     </div>
                     <span className="font-medium text-sm">
