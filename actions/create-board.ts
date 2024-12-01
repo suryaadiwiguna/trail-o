@@ -5,18 +5,19 @@ import { db } from "@/lib/db"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
+export type State = {
+    errors?: {
+        title?: string[];
+    },
+    message?: string | null;
+}
+
 const CreateBoard = z.object({
     title: z.string().min(3, {
         message: "Minimum length of 3 letters is required"
     })
 })
 
-export type State = {
-    errors?: {
-        title?: string[]
-    },
-    message?: null | string
-}
 
 export async function createBoard(prevState: State, formData: FormData) {
 
@@ -45,6 +46,6 @@ export async function createBoard(prevState: State, formData: FormData) {
         }
     }
 
-    revalidatePath("/organization/org_2lmqPDRUJxCatjkoHFPwARjmMyR")
-    redirect("/organization/org_2lmqPDRUJxCatjkoHFPwARjmMyR")
+    revalidatePath("/organization/org_2lmqPDRUJxCatjkoHFPwARjmMyR");
+    redirect("/organization/org_2lmqPDRUJxCatjkoHFPwARjmMyR");
 }
